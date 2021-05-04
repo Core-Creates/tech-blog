@@ -1,5 +1,5 @@
 const router = require('express').Router();
-// const { User } = require('../models');
+
 
 
 router.get('/', async (req, res) => {
@@ -12,12 +12,12 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect('/');
-    return;
-  }
-
+try {
   res.render('login');
+} catch (error) {
+  res.status(500).json(error);
+}
+  
 });
 
 module.exports = router;
